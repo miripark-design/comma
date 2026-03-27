@@ -1,0 +1,1241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comma — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:             #f0ede8;
+      --surface:        #e0dcd4;
+      --text-primary:   #2a2a28;
+      --text-secondary: #6a6660;
+      --accent:         #c8540a;
+      --font-sans:      'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-mono:      ui-monospace, 'SF Mono', Consolas, monospace;
+    }
+
+    html { background: var(--bg); }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      min-width: 1440px;
+      padding: 0 80px 120px;
+    }
+
+    /* ── Helpers ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--surface);
+      margin: 80px 0;
+    }
+    .section-tag {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+    .section-tag span {
+      color: var(--accent);
+      margin-right: 14px;
+    }
+    .sub-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--surface);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .header-left {}
+    .header-title {
+      font-size: 72px;
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      color: var(--text-primary);
+    }
+    .header-title .comma { color: var(--accent); }
+    .header-byline {
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      color: var(--text-secondary);
+    }
+    .header-right {
+      text-align: right;
+    }
+    .header-meta {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      line-height: 2;
+    }
+
+    /* ── 01 COLOR ── */
+    .colors-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+    }
+    .color-swatch {}
+    .color-block {
+      height: 180px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .color-token {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      font-family: var(--font-mono);
+    }
+    .color-hex {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      margin-bottom: 8px;
+    }
+    .color-ref {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .color-usage {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    .color-contrast {
+      margin-top: 8px;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+
+    /* ── 02 TYPOGRAPHY ── */
+    .type-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .type-row {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 48px;
+      align-items: center;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--surface);
+    }
+    .type-row:first-child { border-top: 1px solid var(--surface); }
+    .type-specimen {}
+    .type-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .type-role {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .type-spec {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+
+    /* ── 03 SPACING ── */
+    .spacing-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+    }
+    .spacing-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .spacing-bar-wrap {
+      display: flex;
+      align-items: flex-end;
+      height: 60px;
+    }
+    .spacing-bar {
+      background: var(--text-primary);
+      width: 24px;
+    }
+    .spacing-value {
+      font-size: 11px;
+      font-weight: 400;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+    .spacing-use {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 80px;
+      line-height: 1.4;
+    }
+
+    /* ── 04 COMPONENTS ── */
+    .components-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .component-cell {
+      background: var(--bg);
+      padding: 40px;
+      border: 1px solid var(--surface);
+    }
+    .component-cell-wide {
+      grid-column: 1 / -1;
+      background: var(--bg);
+      padding: 40px;
+      border: 1px solid var(--surface);
+    }
+    .component-name {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    .component-states {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .state-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .state-label {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    /* Button */
+    .btn-primary {
+      background: var(--accent);
+      color: #f4f1ec;
+      border: none;
+      padding: 16px 48px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: default;
+      display: inline-block;
+    }
+    .btn-primary-hover {
+      background: var(--accent);
+      color: #f4f1ec;
+      border: none;
+      padding: 16px 48px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: default;
+      display: inline-block;
+      opacity: 0.88;
+    }
+    .btn-primary-full {
+      background: var(--accent);
+      color: #f4f1ec;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: default;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+    .btn-ghost {
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      cursor: default;
+      padding: 0;
+      display: inline-block;
+    }
+    .btn-ghost-hover {
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      cursor: default;
+      padding: 0;
+      display: inline-block;
+    }
+    .btn-focus {
+      background: var(--accent);
+      color: #f4f1ec;
+      border: none;
+      padding: 16px 48px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: default;
+      display: inline-block;
+      outline: 2px solid var(--text-primary);
+      outline-offset: 3px;
+    }
+
+    /* Toggle */
+    .toggle-demo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .toggle-side {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      min-width: 18px;
+      text-align: center;
+    }
+    .toggle-track {
+      width: 36px;
+      height: 20px;
+      border-radius: 10px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      background: var(--bg);
+      border-radius: 50%;
+    }
+
+    /* Option Selector */
+    .option-group {
+      display: flex;
+      width: 100%;
+    }
+    .option-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 6px;
+      border-bottom: 1px solid var(--surface);
+      text-align: center;
+    }
+    .option-item--active {
+      border-bottom: 1.5px solid var(--text-primary);
+    }
+    .option-item-name {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+    .option-item--active .option-item-name {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .option-item-sub {
+      font-size: 10px;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+
+    /* Custom input */
+    .custom-input-demo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .custom-input {
+      width: 52px;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--text-primary);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      text-align: center;
+      padding: 4px 0;
+    }
+
+    /* ── 05 BOX ANIMATION ── */
+    .animation-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .animation-cell {
+      background: var(--bg);
+      border: 1px solid var(--surface);
+      padding: 32px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .animation-phase-name {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    .animation-phase-desc {
+      font-size: 10px;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    /* ── 06 DESIGN PRINCIPLES ── */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+    .principle-cell {
+      padding: 32px 36px;
+      border: 1px solid var(--surface);
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 20px;
+    }
+    .principle-num {
+      font-size: 11px;
+      font-weight: 400;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      padding-top: 2px;
+    }
+    .principle-body {}
+    .principle-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+    }
+    .principle-apply {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+      line-height: 1.55;
+    }
+
+    /* ── 07 RULES OF RESTRAINT ── */
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .rule-cell {
+      padding: 32px 36px;
+      border: 1px solid var(--surface);
+    }
+    .rule-marker {
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 20px;
+    }
+    .rule-text {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+      line-height: 1.6;
+    }
+    .rule-text strong {
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════ HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="header-title">Comma<span class="comma">,</span></div>
+      <div class="header-byline">by oddly calm</div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        Design System<br>
+        Version 1.0<br>
+        Braun-derived palette<br>
+        Dieter Rams philosophy
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════ 01 COLOR -->
+  <div style="margin-top: 80px;">
+    <div class="section-tag"><span>01</span>Color Palette</div>
+    <div class="colors-grid">
+
+      <div class="color-swatch">
+        <div class="color-block" style="background:#f0ede8; border: 1px solid var(--surface);"></div>
+        <div class="color-token">--bg</div>
+        <div class="color-hex">#f0ede8</div>
+        <div class="color-ref">Braun SK4 record player body</div>
+        <div class="color-usage">Page background</div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-block" style="background:#e0dcd4;"></div>
+        <div class="color-token">--surface</div>
+        <div class="color-hex">#e0dcd4</div>
+        <div class="color-ref">Braun panel warm grey</div>
+        <div class="color-usage">Inactive borders, toggle tracks, box sides</div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-block" style="background:#2a2a28;"></div>
+        <div class="color-token">--text-primary</div>
+        <div class="color-hex">#2a2a28</div>
+        <div class="color-ref">Braun ET66 calculator body</div>
+        <div class="color-usage">Headings, active text, active states</div>
+        <div class="color-contrast">8.4:1 on --bg · AAA ✓</div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-block" style="background:#6a6660;"></div>
+        <div class="color-token">--text-secondary</div>
+        <div class="color-hex">#6a6660</div>
+        <div class="color-ref">Braun muted tone</div>
+        <div class="color-usage">Labels, captions, inactive states</div>
+        <div class="color-contrast">4.6:1 on --bg · AA ✓</div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-block" style="background:#c8540a;"></div>
+        <div class="color-token">--accent</div>
+        <div class="color-hex">#c8540a</div>
+        <div class="color-ref">Braun orange · T3 radio dial</div>
+        <div class="color-usage">One element per screen only</div>
+        <div class="color-contrast">3.2:1 on #f4f1ec · AA Large ✓</div>
+      </div>
+
+    </div>
+
+    <!-- Usage rule callout -->
+    <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
+      <div style="padding: 24px 28px; border: 1px solid var(--surface);">
+        <div class="sub-label" style="margin-bottom: 12px;">Config screen</div>
+        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
+          Accent on <span style="color: var(--text-primary); font-weight: 500;">Begin button</span> only
+        </div>
+      </div>
+      <div style="padding: 24px 28px; border: 1px solid var(--surface);">
+        <div class="sub-label" style="margin-bottom: 12px;">Session screen</div>
+        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
+          Accent on <span style="color: var(--text-primary); font-weight: 500;">tracing dot</span> only
+        </div>
+      </div>
+      <div style="padding: 24px 28px; border: 1px solid var(--surface);">
+        <div class="sub-label" style="margin-bottom: 12px;">Completion screen</div>
+        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
+          Accent on <span style="color: var(--text-primary); font-weight: 500;">Go again button</span> only
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ 02 TYPOGRAPHY -->
+  <div class="divider"></div>
+  <div class="section-tag"><span>02</span>Typography Scale</div>
+
+  <!-- Font stack -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 48px;">
+    <div style="padding: 28px 32px; border: 1px solid var(--surface);">
+      <div class="sub-label" style="margin-bottom: 16px;">Primary · sans-serif</div>
+      <div style="font-size: 28px; font-weight: 300; color: var(--text-primary); letter-spacing: -0.01em;">DM Sans</div>
+      <div style="margin-top: 8px; font-size: 11px; color: var(--text-secondary); font-family: var(--font-mono); letter-spacing: 0.04em;">'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif</div>
+      <div style="margin-top: 16px; font-size: 11px; color: var(--text-secondary); line-height: 1.7;">Weights used: 300 · 400 · 500</div>
+    </div>
+    <div style="padding: 28px 32px; border: 1px solid var(--surface);">
+      <div class="sub-label" style="margin-bottom: 16px;">Secondary · monospace</div>
+      <div style="font-size: 28px; font-weight: 300; color: var(--text-primary); font-family: var(--font-mono);">0123456789</div>
+      <div style="margin-top: 8px; font-size: 11px; color: var(--text-secondary); font-family: var(--font-mono); letter-spacing: 0.04em;">ui-monospace, 'SF Mono', Consolas, monospace</div>
+      <div style="margin-top: 16px; font-size: 11px; color: var(--text-secondary); line-height: 1.7;">Countdown timers only — prevents layout shift</div>
+    </div>
+  </div>
+
+  <div class="type-rows">
+
+    <div class="type-row">
+      <div class="type-specimen">
+        <div style="font-size:48px; font-weight:300; letter-spacing:-0.02em; color:var(--text-primary); line-height:1;">Comma<span style="color:var(--accent)">,</span></div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">App Title</div>
+        <div class="type-spec">48px · weight 300 · -0.02em</div>
+        <div class="type-spec">color: --text-primary</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-specimen">
+        <div style="font-size:19px; font-weight:300; letter-spacing:0.01em; color:var(--text-primary); line-height:1.55; max-width: 320px;">You just chose presence.</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">Completion Message</div>
+        <div class="type-spec">19px · weight 300 · +0.01em</div>
+        <div class="type-spec">color: --text-primary · line-height 1.55</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-specimen">
+        <div style="font-size:52px; font-weight:300; color:var(--text-primary); font-family:var(--font-mono); line-height:1;">4</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">Countdown Timer</div>
+        <div class="type-spec">52px · weight 300 · mono</div>
+        <div class="type-spec">color: --text-primary · monospace only</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-specimen" style="display:flex; gap:40px; align-items:center;">
+        <div style="font-size:12px; font-weight:400; color:var(--text-secondary);">Box Breathing</div>
+        <div style="font-size:12px; font-weight:500; color:var(--text-primary);">Box Breathing</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">Option Name</div>
+        <div class="type-spec">12px · weight 400 (default) · 500 (active)</div>
+        <div class="type-spec">color: --text-secondary / --text-primary</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-specimen">
+        <div style="font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:#f4f1ec; background:var(--accent); padding:14px 32px; display:inline-block;">Begin</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">Primary Button Label</div>
+        <div class="type-spec">11px · weight 500 · +0.18em · uppercase</div>
+        <div class="type-spec">color: #f4f1ec on --accent</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-specimen">
+        <div style="font-size:11px; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-secondary);">End session</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">Ghost Button</div>
+        <div class="type-spec">11px · weight 400 · +0.14em · uppercase</div>
+        <div class="type-spec">color: --text-secondary</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-specimen">
+        <div style="font-size:11px; font-weight:400; letter-spacing:0.14em; color:var(--text-secondary);">by oddly calm</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">Byline</div>
+        <div class="type-spec">11px · weight 400 · +0.14em</div>
+        <div class="type-spec">color: --text-secondary</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-specimen">
+        <div style="font-size:10px; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-secondary);">Pattern</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">Section Label</div>
+        <div class="type-spec">10px · weight 400 · +0.14em · uppercase</div>
+        <div class="type-spec">color: --text-secondary</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-specimen" style="display:flex; gap: 32px; align-items: center;">
+        <div style="font-size:10px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-secondary);">INHALE</div>
+        <div style="font-size:10px; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-secondary);">cycle 3 / 12</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">Phase Label · Cycle Counter</div>
+        <div class="type-spec">10px · weight 500 / 400 · +0.12–0.15em · uppercase</div>
+        <div class="type-spec">color: --text-secondary</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-specimen" style="display: flex; gap: 32px; align-items: center;">
+        <div style="font-size:10px; font-weight:400; letter-spacing:0.04em; color:var(--text-secondary);">4 – 4 – 4 – 4</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-role">Option Sublabel</div>
+        <div class="type-spec">10px · weight 400 · +0.04em</div>
+        <div class="type-spec">color: --text-secondary</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ 03 SPACING -->
+  <div class="divider"></div>
+  <div class="section-tag"><span>03</span>Spacing System</div>
+
+  <div class="spacing-row">
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:4px;"></div></div>
+      <div class="spacing-value">4px</div>
+      <div class="spacing-use">Option sublabel gap</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:6px;"></div></div>
+      <div class="spacing-value">6px</div>
+      <div class="spacing-use">Title → byline</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:10px;"></div></div>
+      <div class="spacing-value">10px</div>
+      <div class="spacing-use">Custom input gap</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:12px;"></div></div>
+      <div class="spacing-value">12px</div>
+      <div class="spacing-use">Toggle gap</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:16px;"></div></div>
+      <div class="spacing-value">16px</div>
+      <div class="spacing-use">Button padding vertical</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:20px;"></div></div>
+      <div class="spacing-value">20px</div>
+      <div class="spacing-use">Config section gap</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:28px;"></div></div>
+      <div class="spacing-value">28px</div>
+      <div class="spacing-use">Cycle counter margin</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:32px;"></div></div>
+      <div class="spacing-value">32px</div>
+      <div class="spacing-use">Horizontal padding</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:36px;"></div></div>
+      <div class="spacing-value">36px</div>
+      <div class="spacing-use">Action gap</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:44px;"></div></div>
+      <div class="spacing-value">44px</div>
+      <div class="spacing-use">Screen section gap</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:48px;"></div></div>
+      <div class="spacing-value">48px</div>
+      <div class="spacing-use">Screen padding vertical</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar-wrap"><div class="spacing-bar" style="height:52px;"></div></div>
+      <div class="spacing-value">52px</div>
+      <div class="spacing-use">Completion gap</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
+    <div style="padding: 24px 28px; border: 1px solid var(--surface);">
+      <div class="sub-label" style="margin-bottom: 12px;">Content width</div>
+      <div style="font-size: 13px; color: var(--text-primary); font-family: var(--font-mono);">max-width: 480px</div>
+      <div style="margin-top: 6px; font-size: 11px; color: var(--text-secondary);">Config and completion screens</div>
+    </div>
+    <div style="padding: 24px 28px; border: 1px solid var(--surface);">
+      <div class="sub-label" style="margin-bottom: 12px;">Animation size</div>
+      <div style="font-size: 13px; color: var(--text-primary); font-family: var(--font-mono);">80vmin · max 480px</div>
+      <div style="margin-top: 6px; font-size: 11px; color: var(--text-secondary);">Square, scales to viewport</div>
+    </div>
+    <div style="padding: 24px 28px; border: 1px solid var(--surface);">
+      <div class="sub-label" style="margin-bottom: 12px;">Layout</div>
+      <div style="font-size: 13px; color: var(--text-primary); font-family: var(--font-mono);">100svh flexbox center</div>
+      <div style="margin-top: 6px; font-size: 11px; color: var(--text-secondary);">No fixed heights, content sizes all</div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ 04 COMPONENTS -->
+  <div class="divider"></div>
+  <div class="section-tag"><span>04</span>Components</div>
+
+  <!-- Buttons -->
+  <div class="components-grid" style="margin-bottom: 2px;">
+
+    <div class="component-cell">
+      <div class="component-name">Primary Button</div>
+      <div class="component-states">
+        <div class="state-wrap">
+          <div class="state-label">Default</div>
+          <div class="btn-primary">Begin</div>
+        </div>
+        <div class="state-wrap">
+          <div class="state-label">Hover · opacity 0.88</div>
+          <div class="btn-primary-hover">Begin</div>
+        </div>
+        <div class="state-wrap">
+          <div class="state-label">Focus</div>
+          <div class="btn-focus">Begin</div>
+        </div>
+      </div>
+      <div style="margin-top: 28px; width: 100%;">
+        <div class="state-label" style="margin-bottom: 12px;">Full-width (config screen)</div>
+        <div class="btn-primary-full">Begin</div>
+      </div>
+    </div>
+
+    <div class="component-cell">
+      <div class="component-name">Ghost Button</div>
+      <div class="component-states">
+        <div class="state-wrap">
+          <div class="state-label">Default</div>
+          <div class="btn-ghost">End session</div>
+        </div>
+        <div class="state-wrap">
+          <div class="state-label">Hover</div>
+          <div class="btn-ghost-hover">End session</div>
+        </div>
+      </div>
+      <div style="margin-top: 40px;">
+        <div class="state-label" style="margin-bottom: 12px;">Inline (completion screen)</div>
+        <div class="btn-ghost">Close</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toggle -->
+  <div class="component-cell-wide" style="border: 1px solid var(--surface); padding: 40px; margin-bottom: 2px;">
+    <div class="component-name">Toggle Switch · Sound</div>
+    <div style="display: flex; gap: 80px; align-items: flex-start;">
+
+      <div class="state-wrap">
+        <div class="state-label" style="margin-bottom: 16px;">Off state</div>
+        <div class="toggle-demo">
+          <span class="toggle-side" style="color:var(--text-primary);">off</span>
+          <div class="toggle-track" style="background:var(--surface);">
+            <div class="toggle-thumb"></div>
+          </div>
+          <span class="toggle-side" style="color:var(--text-secondary);">on</span>
+        </div>
+      </div>
+
+      <div class="state-wrap">
+        <div class="state-label" style="margin-bottom: 16px;">On state</div>
+        <div class="toggle-demo">
+          <span class="toggle-side" style="color:var(--text-secondary);">off</span>
+          <div class="toggle-track" style="background:var(--text-primary);">
+            <div class="toggle-thumb" style="transform: translateX(16px);"></div>
+          </div>
+          <span class="toggle-side" style="color:var(--text-primary);">on</span>
+        </div>
+      </div>
+
+      <div style="margin-left: 40px; padding-left: 40px; border-left: 1px solid var(--surface);">
+        <div class="state-label" style="margin-bottom: 16px;">Specs</div>
+        <div style="font-size:11px; color:var(--text-secondary); font-family:var(--font-mono); line-height:2.2;">
+          Track: 36 × 20px · border-radius 10px<br>
+          Thumb: 14 × 14px · offset 3px<br>
+          Off track: --surface<br>
+          On track:  --text-primary<br>
+          Thumb: --bg (always)<br>
+          Transition: 0.2s
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pattern Selector -->
+  <div class="component-cell-wide" style="border: 1px solid var(--surface); padding: 40px; margin-bottom: 2px;">
+    <div class="component-name">Segmented Option Selector · Pattern</div>
+    <div style="max-width: 480px;">
+      <div class="option-group">
+        <div class="option-item option-item--active">
+          <div class="option-item-name">Box Breathing</div>
+          <div class="option-item-sub">4 – 4 – 4 – 4</div>
+        </div>
+        <div class="option-item">
+          <div class="option-item-name">4 – 7 – 8</div>
+          <div class="option-item-sub">deep rest</div>
+        </div>
+        <div class="option-item">
+          <div class="option-item-name">Calm Breathing</div>
+          <div class="option-item-sub">4 – 6</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 32px; font-size:11px; color:var(--text-secondary); font-family:var(--font-mono); line-height:2;">
+      Active: border-bottom 1.5px --text-primary · font-weight 500 · color --text-primary<br>
+      Default: border-bottom 1px --surface · font-weight 400 · color --text-secondary<br>
+      Transition: color 0.15s · border-color 0.15s
+    </div>
+  </div>
+
+  <!-- Duration Picker -->
+  <div class="component-cell-wide" style="border: 1px solid var(--surface); padding: 40px; margin-bottom: 2px;">
+    <div class="component-name">Segmented Option Selector · Duration</div>
+    <div style="max-width: 480px;">
+      <div class="option-group">
+        <div class="option-item">
+          <div class="option-item-name">2 min</div>
+        </div>
+        <div class="option-item option-item--active">
+          <div class="option-item-name">4 min</div>
+        </div>
+        <div class="option-item">
+          <div class="option-item-name">6 min</div>
+        </div>
+        <div class="option-item">
+          <div class="option-item-name">Custom</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 32px; display: flex; align-items: center; gap: 24px;">
+      <div class="sub-label" style="margin-bottom: 0;">Custom active:</div>
+      <div class="custom-input-demo">
+        <input class="custom-input" value="7" readonly />
+        <span style="font-size:10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-secondary);">min</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ 05 BOX ANIMATION -->
+  <div class="divider"></div>
+  <div class="section-tag"><span>05</span>Box Animation · Four Phase States</div>
+
+  <div class="animation-grid">
+
+    <!-- Phase 0: Inhale — dot midpoint top side (200, 60) -->
+    <div class="animation-cell">
+      <div>
+        <div class="animation-phase-name">Phase 0 · Inhale</div>
+        <div class="animation-phase-desc">Top side active · dot left → right</div>
+      </div>
+      <svg viewBox="0 0 400 400" width="220" height="220" style="display:block;">
+        <circle cx="60" cy="60" r="3" fill="#e0dcd4"/>
+        <circle cx="340" cy="60" r="3" fill="#e0dcd4"/>
+        <circle cx="340" cy="340" r="3" fill="#e0dcd4"/>
+        <circle cx="60" cy="340" r="3" fill="#e0dcd4"/>
+        <line x1="60" y1="60" x2="340" y2="60" stroke="#2a2a28" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="340" y1="60" x2="340" y2="340" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <line x1="340" y1="340" x2="60" y2="340" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <line x1="60" y1="340" x2="60" y2="60" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="200" cy="60" r="8" fill="#c8540a"/>
+        <text x="200" y="178" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="500" letter-spacing="2.5" fill="#6a6660">INHALE</text>
+        <text x="200" y="222" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace, monospace" font-size="52" font-weight="300" fill="#2a2a28">4</text>
+      </svg>
+    </div>
+
+    <!-- Phase 1: Hold — dot midpoint right side (340, 200) -->
+    <div class="animation-cell">
+      <div>
+        <div class="animation-phase-name">Phase 1 · Hold</div>
+        <div class="animation-phase-desc">Right side active · dot top → bottom</div>
+      </div>
+      <svg viewBox="0 0 400 400" width="220" height="220" style="display:block;">
+        <circle cx="60" cy="60" r="3" fill="#e0dcd4"/>
+        <circle cx="340" cy="60" r="3" fill="#e0dcd4"/>
+        <circle cx="340" cy="340" r="3" fill="#e0dcd4"/>
+        <circle cx="60" cy="340" r="3" fill="#e0dcd4"/>
+        <line x1="60" y1="60" x2="340" y2="60" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <line x1="340" y1="60" x2="340" y2="340" stroke="#2a2a28" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="340" y1="340" x2="60" y2="340" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <line x1="60" y1="340" x2="60" y2="60" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="340" cy="200" r="8" fill="#c8540a"/>
+        <text x="200" y="178" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="500" letter-spacing="2.5" fill="#6a6660">HOLD</text>
+        <text x="200" y="222" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace, monospace" font-size="52" font-weight="300" fill="#2a2a28">4</text>
+      </svg>
+    </div>
+
+    <!-- Phase 2: Exhale — dot midpoint bottom side (200, 340) -->
+    <div class="animation-cell">
+      <div>
+        <div class="animation-phase-name">Phase 2 · Exhale</div>
+        <div class="animation-phase-desc">Bottom side active · dot right → left</div>
+      </div>
+      <svg viewBox="0 0 400 400" width="220" height="220" style="display:block;">
+        <circle cx="60" cy="60" r="3" fill="#e0dcd4"/>
+        <circle cx="340" cy="60" r="3" fill="#e0dcd4"/>
+        <circle cx="340" cy="340" r="3" fill="#e0dcd4"/>
+        <circle cx="60" cy="340" r="3" fill="#e0dcd4"/>
+        <line x1="60" y1="60" x2="340" y2="60" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <line x1="340" y1="60" x2="340" y2="340" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <line x1="340" y1="340" x2="60" y2="340" stroke="#2a2a28" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="60" y1="340" x2="60" y2="60" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="200" cy="340" r="8" fill="#c8540a"/>
+        <text x="200" y="178" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="500" letter-spacing="2.5" fill="#6a6660">EXHALE</text>
+        <text x="200" y="222" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace, monospace" font-size="52" font-weight="300" fill="#2a2a28">4</text>
+      </svg>
+    </div>
+
+    <!-- Phase 3: Hold — dot midpoint left side (60, 200) -->
+    <div class="animation-cell">
+      <div>
+        <div class="animation-phase-name">Phase 3 · Hold</div>
+        <div class="animation-phase-desc">Left side active · dot bottom → top</div>
+      </div>
+      <svg viewBox="0 0 400 400" width="220" height="220" style="display:block;">
+        <circle cx="60" cy="60" r="3" fill="#e0dcd4"/>
+        <circle cx="340" cy="60" r="3" fill="#e0dcd4"/>
+        <circle cx="340" cy="340" r="3" fill="#e0dcd4"/>
+        <circle cx="60" cy="340" r="3" fill="#e0dcd4"/>
+        <line x1="60" y1="60" x2="340" y2="60" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <line x1="340" y1="60" x2="340" y2="340" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <line x1="340" y1="340" x2="60" y2="340" stroke="#e0dcd4" stroke-width="1" stroke-linecap="round"/>
+        <line x1="60" y1="340" x2="60" y2="60" stroke="#2a2a28" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="60" cy="200" r="8" fill="#c8540a"/>
+        <text x="200" y="178" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="500" letter-spacing="2.5" fill="#6a6660">HOLD</text>
+        <text x="200" y="222" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace, monospace" font-size="52" font-weight="300" fill="#2a2a28">4</text>
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- Animation specs -->
+  <div style="margin-top: 2px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
+    <div style="padding: 24px 28px; border: 1px solid var(--surface);">
+      <div class="sub-label" style="margin-bottom: 12px;">Dot</div>
+      <div style="font-size:11px; color:var(--text-secondary); font-family:var(--font-mono); line-height:2.2;">
+        r=8 · fill --accent<br>
+        Sole accent use on session screen<br>
+        Hidden: prefers-reduced-motion
+      </div>
+    </div>
+    <div style="padding: 24px 28px; border: 1px solid var(--surface);">
+      <div class="sub-label" style="margin-bottom: 12px;">Box Geometry</div>
+      <div style="font-size:11px; color:var(--text-secondary); font-family:var(--font-mono); line-height:2.2;">
+        SVG viewBox: 0 0 400 400<br>
+        Box: (60,60) → (340,340)<br>
+        280 × 280 units
+      </div>
+    </div>
+    <div style="padding: 24px 28px; border: 1px solid var(--surface);">
+      <div class="sub-label" style="margin-bottom: 12px;">Sound trigger</div>
+      <div style="font-size:11px; color:var(--text-secondary); font-family:var(--font-mono); line-height:2.2;">
+        Plays: phase 0 (Inhale)<br>
+        Plays: phase 2 (Exhale)<br>
+        Silent: phases 1 &amp; 3 (Hold)
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ 06 DESIGN PRINCIPLES -->
+  <div class="divider"></div>
+  <div class="section-tag"><span>06</span>Dieter Rams · Ten Principles</div>
+
+  <div class="principles-grid">
+
+    <div class="principle-cell">
+      <div class="principle-num">01</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design is innovative</div>
+        <div class="principle-apply">Breathing as UI — the interaction itself is the content. The app has no content except the act of using it.</div>
+      </div>
+    </div>
+
+    <div class="principle-cell">
+      <div class="principle-num">02</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design makes a product useful</div>
+        <div class="principle-apply">One task. No navigation, no dashboard, no features beyond the core. Every screen is purposeful.</div>
+      </div>
+    </div>
+
+    <div class="principle-cell">
+      <div class="principle-num">03</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design is aesthetic</div>
+        <div class="principle-apply">Warm off-whites extracted from physical Braun products. One accent. Restraint in every dimension.</div>
+      </div>
+    </div>
+
+    <div class="principle-cell">
+      <div class="principle-num">04</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design makes a product understandable</div>
+        <div class="principle-apply">Three patterns, plain names. No jargon. The box tells you exactly what to do.</div>
+      </div>
+    </div>
+
+    <div class="principle-cell">
+      <div class="principle-num">05</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design is unobtrusive</div>
+        <div class="principle-apply">The app disappears. Only the breath remains. No chrome, no navigation, no distraction during a session.</div>
+      </div>
+    </div>
+
+    <div class="principle-cell">
+      <div class="principle-num">06</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design is honest</div>
+        <div class="principle-apply">No streaks, no badges, no gamification. The completion message acknowledges the moment without exploiting it.</div>
+      </div>
+    </div>
+
+    <div class="principle-cell">
+      <div class="principle-num">07</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design is long-lasting</div>
+        <div class="principle-apply">No trends. The palette could be from 1962. DM Sans reads like Helvetica. Nothing will feel dated in ten years.</div>
+      </div>
+    </div>
+
+    <div class="principle-cell">
+      <div class="principle-num">08</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design is thorough</div>
+        <div class="principle-apply">WCAG AA contrast ratios, reduced motion support, keyboard navigation, ARIA live regions. Nothing overlooked.</div>
+      </div>
+    </div>
+
+    <div class="principle-cell">
+      <div class="principle-num">09</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design is environmentally friendly</div>
+        <div class="principle-apply">No backend, no tracking, no unnecessary requests. localStorage only. Sound synthesized — no files downloaded.</div>
+      </div>
+    </div>
+
+    <div class="principle-cell">
+      <div class="principle-num">10</div>
+      <div class="principle-body">
+        <div class="principle-title">Good design is as little design as possible</div>
+        <div class="principle-apply">Three screens. One accent. Nothing decorative. Every element removed until only the necessary remained.</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ 07 RULES OF RESTRAINT -->
+  <div class="divider"></div>
+  <div class="section-tag"><span>07</span>Rules of Restraint</div>
+
+  <div class="rules-grid">
+
+    <div class="rule-cell">
+      <div class="rule-marker"></div>
+      <div class="rule-text"><strong>One accent per screen.</strong> #c8540a appears on exactly one element at a time. Its presence means something.</div>
+    </div>
+
+    <div class="rule-cell">
+      <div class="rule-marker"></div>
+      <div class="rule-text"><strong>No shadows.</strong> Depth is created by color contrast alone. Nothing floats, nothing casts.</div>
+    </div>
+
+    <div class="rule-cell">
+      <div class="rule-marker"></div>
+      <div class="rule-text"><strong>No border-radius on rectangles.</strong> Buttons and containers are hard-cornered. Softness comes from color, not geometry.</div>
+    </div>
+
+    <div class="rule-cell">
+      <div class="rule-marker"></div>
+      <div class="rule-text"><strong>No gradients.</strong> Every surface is a single flat tone from the palette. Nothing blends.</div>
+    </div>
+
+    <div class="rule-cell">
+      <div class="rule-marker"></div>
+      <div class="rule-text"><strong>No decorative type.</strong> No italics, no display fonts, no ornament. Typography is functional structure, not illustration.</div>
+    </div>
+
+    <div class="rule-cell">
+      <div class="rule-marker"></div>
+      <div class="rule-text"><strong>No icons.</strong> Words do the work icons would do. Language is precise; symbols introduce ambiguity.</div>
+    </div>
+
+  </div>
+
+
+</body>
+</html>

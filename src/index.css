@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f0ede8;
+  --surface: #e0dcd4;
+  --text-primary: #2a2a28;
+  --text-secondary: #6a6660;
+  --accent: #c8540a;
+  --font-sans: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Consolas, monospace;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+/* ─── Config Screen ─── */
+
+.config {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+  padding: 48px 32px;
+  width: 100%;
+  max-width: 480px;
+  animation: appear 0.4s ease both;
+}
+
+.config__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.config__title {
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.config__byline {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.config__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.config__label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.config__options {
+  display: flex;
+  width: 100%;
+}
+
+.config__option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 6px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--surface);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  transition: color 0.15s, border-color 0.15s;
+  text-align: center;
+}
+
+.config__option:hover {
+  color: var(--text-primary);
+}
+
+.config__option--active {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+  font-weight: 500;
+}
+
+.config__option-name {
+  font-size: 12px;
+}
+
+.config__option-sub {
+  font-size: 10px;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+}
+
+.config__option--active .config__option-name {
+  color: var(--text-primary);
+}
+
+.config__custom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.config__custom-input {
+  width: 52px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--text-primary);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-align: center;
+  outline: none;
+  padding: 4px 0;
+}
+
+.config__custom-input::placeholder {
+  color: var(--surface);
+}
+
+.config__toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  padding: 4px 0;
+}
+
+.config__toggle-side {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: color 0.2s;
+  min-width: 18px;
+  text-align: center;
+}
+
+.config__toggle-track {
+  width: 36px;
+  height: 20px;
+  background: var(--surface);
+  border-radius: 10px;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.config__toggle-track--on {
+  background: var(--text-primary);
+}
+
+.config__toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  background: var(--bg);
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.config__toggle-track--on .config__toggle-thumb {
+  transform: translateX(16px);
+}
+
+.config__begin {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: #f4f1ec;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: opacity 0.15s;
+}
+
+.config__begin:hover {
+  opacity: 0.88;
+}
+
+/* ─── Session Screen ─── */
+
+.session {
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: appear 0.5s ease both;
+}
+
+.session__progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  background: var(--text-secondary);
+  transition: width 0.8s linear;
+  opacity: 0.5;
+}
+
+.session__animation {
+  width: 80vmin;
+  max-width: 480px;
+  aspect-ratio: 1;
+}
+
+.session__cycles {
+  margin-top: 28px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.session__end {
+  position: absolute;
+  bottom: 28px;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 16px 32px;
+  transition: color 0.15s;
+}
+
+.session__end:hover {
+  color: var(--text-primary);
+}
+
+/* ─── Completion Screen ─── */
+
+.completion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 52px;
+  padding: 48px 32px;
+  animation: appear 0.6s ease both;
+}
+
+.completion__message {
+  font-size: 19px;
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  text-align: center;
+  max-width: 300px;
+  line-height: 1.55;
+}
+
+.completion__actions {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.completion__again {
+  background: var(--accent);
+  color: #f4f1ec;
+  border: none;
+  padding: 14px 32px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: opacity 0.15s;
+}
+
+.completion__again:hover {
+  opacity: 0.88;
+}
+
+.completion__close {
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 14px 0;
+  transition: color 0.15s;
+}
+
+.completion__close:hover {
+  color: var(--text-primary);
+}
+
+/* ─── Animation ─── */
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .config,
+  .session,
+  .completion {
+    animation: none;
+  }
+}
